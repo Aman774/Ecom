@@ -1,0 +1,144 @@
+{%  extends 'shop/basic.html' %}
+
+
+
+{% block body %} 
+
+<div class ="container">
+
+<h3>This is checkout section </h3>	
+
+<div class="col-lg-8 my-4 mx-3" id="checkitem">	
+
+<!--
+<ul class="list-group">
+  
+  
+</ul> -->
+</div>
+<div class="col-lg-8 my-4 mx-3" id="total">
+ 
+</div>
+
+<div class="container">
+
+<div class="col-lg-8 my-5" >	
+
+ <h2>Enter your personel details</h2>
+<form method="post" action="/shop/checkoutPage/"> {% csrf_token %}
+ <input type="hidden" name="itemsJson" id="itemsJson"  >
+  <div class="form-row">
+    
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">Name</label>
+      <input  name="name" class="form-control" id="inputEmail4" placeholder="name">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputPassword4">email</label>
+      <input  class="form-control" id="inputPassword4" placeholder="email" name="email">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputAddress">Address</label>
+    <input type="text" class="form-control" id="inputAddress" name="address" placeholder="1234 Main St">
+  </div>
+  
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputCity">City</label>
+      <input type="text" class="form-control" id="inputCity" name="city">
+    </div>
+    <div class="form-group col-md-4">
+      <label for="inputState">State</label>
+      <input type="text" class="form-control" id="inputstate" name="state">
+    </div>
+    <div class="form-group col-md-2">
+      <label for="inputZip">Zip</label>
+      <input type="text" class="form-control" id="inputZip" name="zip">
+    </div>
+    <div class="form-group col-md-2">
+      <label for="inputZip">phone no.</label>
+      <input  class="form-control" id="inputZip" name="phone">
+    </div>
+  </div>
+  
+  <button type="submit" class="btn btn-primary">place your order</button>
+</form>
+</div>
+</div>
+
+
+
+
+ {% endblock %}
+
+
+ {% block js%}
+
+
+ <script type="text/javascript">
+ 	
+
+  cart= JSON.parse(localStorage.getItem('cart'));    // converting the string into javascript object
+  
+  var sum=0;
+
+  if($.isEmptyObject(cart))
+  {
+    var str = "<div class='alert alert-primary' role='alert'><p> <h2>No item in your cart please add some item</h2> </p></div>"
+
+          $("#checkitem").append(str);
+
+  }
+
+  else{
+      
+      var price = 0
+        for(item in cart)
+        {
+
+            if(cart[item][0]!=0){
+            var name = cart[item][1];
+
+  			var quant =cart[item][0];
+
+  			 
+  			price =price+cart[item][2];
+
+  		  var str = "<li class='list-group-item d-flex justify-content-between align-items-center'>"+name+"<span class='badge badge-primary badge-pill'>"+quant+"</span></li>"
+
+          $("#checkitem").append(str);   // used for appending the string in the required section using the id of the given html tag
+
+
+          sum=sum+cart[item][0];
+          }
+
+
+        }
+
+        var total =price;
+        var str="<p> Total purchase = "+price+"</p> "
+        $("#total").append(str);
+        document.getElementById('cart2').innerHTML= sum;  
+
+  }
+
+
+
+
+
+
+document.getElementById('cart2').innerHTML = sum;
+$('#itemsJson').val(JSON.stringify(cart));             // storing the cart value in the item_json variable
+/*{% if thank %}
+alert('Thanks for ordering with us. Your order is is {{id}}. Use it to track your order using our order tracker');
+localStorage.clear();
+document.location = "/shop";     //when order is placed then it will return to index window
+{% endif %} */
+
+
+
+ </script>
+
+
+ {% endblock  %}  

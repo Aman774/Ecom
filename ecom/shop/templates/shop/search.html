@@ -1,0 +1,556 @@
+{% extends 'shop/basic.html' %}
+
+
+
+
+  {% block title %} This is index page   {% endblock %}
+
+     {% block css %}
+     .col-md-3
+          {
+          display: inline-block;
+          margin-left:-4px;
+
+
+          }
+
+.col-md-3 img{
+
+   width: 255px;
+   height: 355px;
+
+}
+
+           body .carousel-control-prev-icon,
+          body .carousel-control-next-icon{
+          background-color: blue;
+          position:relative;
+          top:-300px;
+          }
+        body .carousel-control-next-icon{
+            position:relative
+            right:100px;
+           }
+
+        body .carousel-control-prev-icon{
+            position:relative
+            left:100px;
+           }
+
+
+      .carousel-control-prev,
+      .carousel-control-next{
+   top:auto;
+   bottom:auto;
+}
+
+    {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% block body %}
+{% load static %}
+<!-- CROUSEL DIV -->
+
+
+<p>{{msg}}</p>
+
+<div class="container">
+    {% for products,range, slides in allprods  %}
+
+    <h1> {{ products.0.product_category}} </h1>
+<div id="demo{{forloop.counter}}" class="carousel slide my-3" data-ride="carousel">
+    <ul class="carousel-indicators">
+
+        {% for i in range %}
+
+      <li data-target="#demo{{forloop.parentloop.counter}}" data-slide-to="{{i}}" class="active"></li>
+
+
+        {% endfor%}
+    </ul>
+
+    <!--Slideshow starts here -->
+    <div class="container carousel-inner no-padding">
+
+
+
+      <div class="carousel-item active">
+
+         {% for i in products %}
+
+        <div class="col-xs-3 col-sm-3 col-md-3">
+          <div class="card" style="width: 18rem;">
+            <img src='/media/{{i.product_image}}' class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5  id="namepr{{i.id}}" class="card-title">"{{i.product_name}}"</h5>
+                <p class="card-text">{{i.product_desc}}</p>
+                <p class="card-text" id="pricepr{{i.id}}">{{i.product_price}}</p>
+
+
+                <span  id="divpr{{i.id}}"  class ="divpr" >
+                <button  id="pr{{i.id}}"  class="btn btn-primary cart1">Add to cart</button>
+                </span>
+
+                <a href="/shop/products/{{i.id}}">  <button class="btn btn-primary"> product view </button> </a>
+            </div>
+          </div>
+       </div>
+          {% if forloop.counter|divisibleby:4 and forloop.counter > 0 and not forloop.last %}
+      </div> <div class="carousel-item">
+           {% endif %}
+
+         {% endfor%}
+    </div>
+    </div>
+<!--        <div class="col-xs-3 col-sm-3 col-md-3">
+          <div class="card" style="width: 18rem;">
+            <img src='{% static "shop/image.jpg" %}' class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xs-3 col-sm-3 col-md-3">
+          <div class="card" style="width: 18rem;">
+            <img src='{% static "shop/image.jpg" %}' class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xs-3 col-sm-3 col-md-3">
+          <div class="card" style="width: 18rem;">
+            <img src='{% static "shop/image.jpg" %}' class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="carousel-item">
+        <div class="col-xs-3 col-sm-3 col-md-3">
+          <div class="card" style="width: 18rem;">
+            <img src='{% static "shop/image.jpg" %}' class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xs-3 col-sm-3 col-md-3">
+          <div class="card" style="width: 18rem;">
+            <img src='{% static "shop/image.jpg" %}' class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xs-3 col-sm-3 col-md-3">
+          <div class="card" style="width: 18rem;">
+            <img src='{% static "shop/image.jpg" %}' class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xs-3 col-sm-3 col-md-3">
+          <div class="card" style="width: 18rem;">
+            <img src='{% static "shop/image.jpg" %}' class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="carousel-item">
+        <div class="col-xs-3 col-sm-3 col-md-3">
+          <div class="card" style="width: 18rem;">
+            <img src='{% static "shop/image.jpg" %}' class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+       </div>
+
+        <div class="col-xs-3 col-sm-3 col-md-3">
+          <div class="card" style="width: 18rem;">
+            <img src='{% static "shop/image.jpg" %}' class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xs-3 col-sm-3 col-md-3">
+          <div class="card" style="width: 18rem;">
+            <img src='{% static "shop/image.jpg" %}' class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xs-3 col-sm-3 col-md-3">
+          <div class="card" style="width: 18rem;">
+            <img src='{% static "shop/image.jpg" %}' class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</div> -->
+
+    <!-- left and right controls for the slide -->
+    <a class="carousel-control-prev" href="#demo{{forloop.counter}}" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </a>
+    <a class="carousel-control-next" href="#demo{{forloop.counter}}" data-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </a>
+
+      {% endfor %}
+    </div>
+</div>
+{% endblock  %}
+
+
+{% block js %}
+
+<script>
+
+
+console.log(" working");
+
+
+
+
+if(localStorage.getItem('cart')==null)
+{
+  var cart ={} ;
+}
+
+else
+{
+
+
+cart =JSON.parse(localStorage.getItem('cart')) ;         // parsing inorder to convert into javascript object
+updatecart2(cart);
+updatecart(cart);
+}
+
+
+
+$('.divpr').on('click', 'button.cart1', function(){
+
+console.log("clicked")
+
+
+var idstr = this.id.toString();      // it will store the id of the product  on which it has been clicked
+
+if(cart[idstr]==undefined)
+{
+
+  var quant = 1;   // increase the quantity
+
+  name= document.getElementById('name'+idstr).innerHTML;
+  var price = document.getElementById('price'+idstr).innerHTML;
+   price =price*quant;
+  console.log(price);
+
+  cart[idstr]= [quant,name,price];  // here we are storing the quantity and name of the product corresponding to the product id
+
+updatecart(cart);
+updatecart2(cart);
+}
+
+else if(cart[idstr]!=undefined){
+/*console.log("hello1");
+var price = document.getElementById('price'+idstr).innerHTML;
+
+ //var quant = cart[idstr][0]+1;   // here we are storing the quantity of the product alredy there in the cart and increasing it by 1
+ cart[idstr][0]= quant;         // storing the quanity of the product in the cart quant variable
+ price =price*quant;
+
+ cart[idstr][2]=price; */
+
+
+ var quant = 1;   // increase the quantity
+
+  name= document.getElementById('name'+idstr).innerHTML;
+  var price = document.getElementById('price'+idstr).innerHTML;
+   price =price*quant;
+  console.log(price);
+
+  cart[idstr]= [quant,name,price];  // here we are storing the quantity and name of the product corresponding to the product id
+
+updatecart(cart);
+updatecart2(cart);
+
+} 
+
+console.log(cart);
+
+//updatecart(cart,idstr);
+
+update_popover(cart);
+
+//updatecart2(cart)
+
+localStorage.setItem('cart',JSON.stringify(cart));      // data will be send into string form into server
+
+
+
+} );
+
+
+
+function updatecart2(cart)
+{
+
+var sum =0;
+for(var item in cart){
+
+sum=sum+cart[item][0];
+
+}
+
+document.getElementById('cart2').innerHTML=sum;
+
+}
+
+
+
+
+
+function updatecart(cart)
+{
+
+for(var item in cart){
+
+  if(cart[item][0]==0){
+    document.getElementById('div'+item).innerHTML="<button id ='"+item+"' class='btn btn-primary cart1'>Add to cart</button>"
+    
+  }
+  
+else{
+
+document.getElementById('div'+item).innerHTML= "<button id='minus"+item+"' class = 'btn btn-primary minus'>-</button> <span id='val"+item+"' >"+cart[item][0]+ " </span> <button id='plus"+item+"' class = 'btn btn-primary plus'>+</button>  ";
+}}
+
+
+}
+
+
+
+$('.divpr').on("click","button.minus",function()
+{
+
+var value = this.id.slice(5,);
+var x;
+
+
+if(cart[value][0]>0)
+{
+  cart[value][0] = cart[value][0]-1;
+     x=cart[value][0];
+     console.log(x);
+
+
+
+ /*if(cart[value][0]==0){ document.getElementById("div"+value).innerHTML=" <button  id= '"+value+"'class='btn btn-primary cart1'>Add to cart</button>"
+    document.getElementById('cart2').innerHTML= x;
+
+  }    
+else{
+  document.getElementById('val'+value).innerHTML= x;
+
+}*/
+
+
+console.log("minus button");
+var price = document.getElementById('price'+value).innerHTML;
+
+ var quant = cart[value][0];   // here we are storing the quantity of the product alredy there in the cart and increasing it by 1
+          
+ price =price*quant;
+ console.log(price);
+ cart[value][2]=price;
+
+}
+
+else
+{
+  x=0;
+  
+}
+
+document.getElementById('val'+value).innerHTML= x;
+updatecart(cart);
+
+
+
+update_popover(cart);
+updatecart2(cart);
+
+
+localStorage.setItem('cart',JSON.stringify(cart));   // data will be send into string form into server
+ 
+
+
+
+
+
+});
+
+
+$('.divpr').on("click","button.plus",function()
+{
+
+var value = this.id.slice(4,);
+
+cart[value][0] = cart[value][0]+1;
+
+
+
+console.log("plus button");
+var price = document.getElementById('price'+value).innerHTML;
+
+ var quant = cart[value][0];   // here we are storing the quantity of the product alredy there in the cart and increasing it by 1
+          
+ price =price*quant;
+ console.log(price);
+ cart[value][2]=price;
+
+
+
+document.getElementById('val'+value).innerHTML= cart[value][0];
+
+updatecart(cart);
+updatecart2(cart);
+update_popover(cart);
+
+localStorage.setItem('cart',JSON.stringify(cart));         // data will be send into string form into server
+
+
+
+
+});
+
+
+
+
+
+
+$('#pop1').popover();
+update_popover(cart);
+
+
+
+function update_popover(cart)
+{
+ 
+var popstr = "";
+var i=0;
+
+ popstr = popstr + "<h5> Total items in cart </h5> <div>"
+
+for(var item in cart)
+{
+  
+   if(cart[item][0]==0){ document.getElementById('pop1').setAttribute('data-content',"");
+
+   }
+
+else{
+  popstr =popstr + "<ul><li>  " 
+  
+  popstr =popstr + document.getElementById('name'+item).innerHTML + ' Quantity  '+ cart[item][0] + "</li></ul>"}
+}
+
+popstr = popstr + "</div> <a href='/shop/checkoutPage'>checkout</a>"
+
+
+document.getElementById('pop1').setAttribute('data-content', popstr ); // This is used for setting the attribute value of the tag
+  
+      $('#popcart').popover('show');
+}
+
+
+
+
+
+</script>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+
+
+{% endblock %}
+
+
+
+
+
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>

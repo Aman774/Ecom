@@ -1,0 +1,50 @@
+{% extends "shop/basic.html" %}
+
+
+{% block body %}
+<div class="container my-5"    >
+<form  method ="post"  > {% csrf_token %}
+  <div >
+    <div class="col-md-4 mb-3">
+      <label for="validationDefault01">First name</label>
+      <input type="text" name="name" class="form-control" id="validationDefault01" placeholder="First name" value="" required>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <label for="validationDefaultUsername">Username</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroupPrepend2">@</span>
+        </div>
+        <input type="text" name ="email" class="form-control" id="validationDefaultUsername" placeholder="Username" aria-describedby="inputGroupPrepend2" required>
+      </div>
+    </div>
+  </div>
+
+    <div class=" col-md-4 mb-3 my-3">
+    <label for="validationDefault01">Phone No.</label>
+      <input type="text" name ="phone" class="form-control" id="validationDefault01" placeholder="Enter your Phone No." value="" required>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <label for="validationDefault01">Feedback box</label>
+      <input type="text" name="feedback" style="height:150px;" class="form-control" id="validationDefault01" placeholder="give your feedback" value="" required>
+    </div>
+
+
+
+  <button class="btn btn-primary" type="submit">Submit form</button>
+
+
+
+
+</form>
+
+
+
+</div>
+
+
+
+
+{% endblock %}
