@@ -133,6 +133,8 @@ def tracker(request):
         if len(order)>0:
             updates = OrderUpdate.objects.filter(order_id=orderId)
             length =len(updates);
+            list1=[]
+
             #updates=[]
 
             #for item in update:
@@ -143,7 +145,12 @@ def tracker(request):
             prod_details= json.loads(order[0].items_json)
             print(prod_details)
 
-            params ={'updates':updates,'prod_details':prod_details,'length':length}
+            for item in prod_details:
+               value= prod_details[item][0]
+               name = prod_details[item][1]
+               list1.append([value,name])
+
+            params ={'updates':updates,'prod_details':list1,'length':length}
             return render(request,'shop/tracker.html', params)
 
 
